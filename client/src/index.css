@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scroll 15s linear infinite;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+
