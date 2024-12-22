@@ -1,3 +1,5 @@
+
+node_modules/
 # Logs
 logs
 *.log
@@ -23,9 +25,11 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+
 
 # Ignore node_modules
-node_modules/
+
 
 # Ignore package.json
 package.json
