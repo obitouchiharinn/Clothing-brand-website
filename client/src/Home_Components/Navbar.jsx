@@ -8,13 +8,28 @@ import Option from './Option'
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [userName, setUserName] = useState("");
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [cart, setCart] = useState(null);
   const navigate = useNavigate();
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
+
 
   // Fetch user data and cart details
   useEffect(() => {
@@ -64,7 +79,7 @@ const Navbar = () => {
     localStorage.removeItem("userId");
     setUserName("");
     setCart(null);
-    navigate("/login");
+    navigate("/");
   };
 
   // Toggle the cart visibility
@@ -164,31 +179,35 @@ const handleQuantityChange = async (productId, newQuantity) => {
       {/* Top Bar with Scrolling Text */}
       <div className="bg-rose-200 text-sm text-center py-2 text-gray-800 font-medium overflow-hidden">
         <div className="scrolling-text">
-          SALE - UPTO 80% OFF + EXTRA 10% OFF ON PREPAID ORDERS &nbsp;&nbsp;|&nbsp;&nbsp;
-          SALE - UPTO 80% OFF + EXTRA 10% OFF ON PREPAID ORDERS &nbsp;&nbsp;|&nbsp;&nbsp;
+          SALE - UPTO 80% OFF + EXTRA 10% OFF ON PREPAID ORDERS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          SALE - UPTO 80% OFF + EXTRA 10% OFF ON PREPAID ORDERS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           SALE - UPTO 80% OFF + EXTRA 10% OFF ON PREPAID ORDERS
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div className="flex justify-between items-center px-6 py-4">
+      <div className="flex flex-wrap  justify-between items-center px-6 py-4">
         {/* Logo */}
-        <div className="text-2xl font-serif">
-          <span className="font-light">AMBR</span>
-          <span className="font-medium">AEE</span>
+        <div className="text-2xl font-serif flex-shrink-0">
+          <span className="font-light">Mytalorzone</span>
+          <span className="font-medium">By Sahiba</span>
         </div>
 
         {/* Search */}
         <div className="flex-1 max-w-lg mx-4">
+        <form onSubmit={handleSearch}>
           <input
             type="text"
             placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full border border-gray-300 rounded-full px-4 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-500"
           />
+          </form>
         </div>
 
         {/* Icons */}
-        <div className="flex space-x-6 text-gray-600">
+        <div className="flex space-x-6 text-gray-600 relative">
           {userName ? (
             <div className="text-xl font-medium text-gray-700">
               Welcome, {userName}
@@ -198,7 +217,48 @@ const handleQuantityChange = async (productId, newQuantity) => {
               <FaUser />
             </div>
           )}
-          <FaHeart className="text-xl cursor-pointer hover:text-rose-500" />
+
+
+          
+
+
+          {/* <FaUser className="text-xl cursor-pointer hover:text-rose-500" /> */}
+
+          {/* User Dropdown */}
+          <div className="relative">
+            <FaUser
+              className="text-xl cursor-pointer hover:text-rose-500"
+              onClick={toggleUserMenu}
+            />
+            {isUserMenuOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-lg border border-gray-200 rounded-md w-40 z-50">
+                <button
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => navigate("/myorder")}
+                >
+                  Your Orders
+                </button>
+                <button
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => navigate("/complaint")}
+                >
+                  Complaints
+                </button>
+                <button
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={() => navigate("/address")}
+                >
+                  Add Address
+                </button>
+              </div>
+            )}
+          </div>
+          
+
+
+
+
+
           <div className="relative" onClick={toggleCart}>
             <FaShoppingBag className="text-xl cursor-pointer hover:text-rose-500" />
             <span className="absolute -top-3 -right-1 bg-red-600 text-white text-xs px-1 rounded-full">

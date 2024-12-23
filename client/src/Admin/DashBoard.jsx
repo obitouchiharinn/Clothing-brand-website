@@ -4,6 +4,12 @@ import Header from "./D_Components/Header";
 import Dashboard from "./Page";
 import ProductForm from "./D_Components/ProductForm";
 import CouponForm from "./D_Components/CouponForm";
+import Complaint from "./D_Components/DisplayComplaint";
+import Orders from "./D_Components/Orders";
+import User from "./D_Components/User";
+
+
+
 
 const App = () => {
   const [activeView, setActiveView] = useState("dashboard"); // Single state for active view
@@ -21,6 +27,10 @@ const App = () => {
           {activeView === "orders" && <div>Orders Page</div>}
           {activeView === "users" && <div>Users Page</div>}
           {activeView === "coupon" && <CouponForm />}
+          {activeView === "complaint" && <Complaint />}
+          {activeView === "orders" && <Orders />}
+          {activeView === "users" && <User />}
+
         </div>
       </div>
     </div>

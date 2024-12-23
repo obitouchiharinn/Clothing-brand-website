@@ -37,6 +37,12 @@ const Sidebar = ({ setActiveView }) => {
         >
           <i className="fas fa-chart-bar mr-2"></i> Coupon
         </li>
+        <li
+          className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+          onClick={() => setActiveView("complaint")}
+        >
+          <i className="fas fa-chart-bar mr-2"></i> Complaint
+        </li>
       </ul>
     </div>
   );

@@ -5,6 +5,8 @@ import Navbar from "./Navbar";
 import { FaSmile, FaTruck, FaExchangeAlt, FaGlobe } from "react-icons/fa";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import sizeChartImage from "../assets/images/banner.webp";
+import NewArrivals from "./Filter_Option/OldArrival";
+
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -271,6 +273,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <NewArrivals />
     </div>
   );
 };
